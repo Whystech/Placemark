@@ -1,0 +1,46 @@
+{
+  "name": "POIAPP",
+  "version": "0.10.0",
+  "description": "TESTAPP",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "./node_modules/.bin/nodemon src/server.js --ignore 'src/models/json/*.json'",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
+    "test": "./node_modules/mocha/bin/_mocha --ui tdd test/**/*.js -exit",
+    "testmodels": "./node_modules/mocha/bin/_mocha --ui tdd test/models/**/*.js -exit",
+    "testapi": "./node_modules/mocha/bin/_mocha --ui tdd test/api/**/*.js -exit"
+  },
+  "keywords": [
+    "node",
+    "hapi"
+  ],
+  "dependencies": {
+    "@hapi/boom": "^10.0.1",
+    "@hapi/cookie": "^12.0.1",
+    "@hapi/hapi": "^21.4.3",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/vision": "^7.0.3",
+    "dotenv": "^17.2.3",
+    "handlebars": "^4.7.8",
+    "hapi-auth-jwt2": "^11.0.0",
+    "hapi-swagger": "^17.3.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "lowdb": "^7.0.1",
+    "mongoose": "^8.19.2",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "axios": "^1.13.1",
+    "chai": "^6.2.0",
+    "eslint": "8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "mocha": "^11.7.4",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
+}
