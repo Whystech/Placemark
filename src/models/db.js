@@ -1,7 +1,7 @@
 import { userMemStore } from "./mem/user-mem-store.js";
 import { userJsonStore } from "./json/user-json-store.js";
-import { userMongoStore } from "../controllers/mongo/user-mongo-store.js";
-import { connectMongo } from "../controllers/mongo/connect.js";
+import { userMongoStore } from "./mongo/user-mongo-store.js";
+import { connectMongo } from "./mongo/connect.js";
 import { poiJsonStore } from "./json/poi-json-store.js";
 import { poiMongoStore } from "./mongo/poi-mongo-store.js";
 

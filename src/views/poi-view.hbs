@@ -1,58 +1,40 @@
 {{> menu}}
 
-<form class="box" action="/poi/update/{{poi._id}}" method="POST">
-  <label>Update Poi Details:</label>
-  <div class="field is-horizontal">
-    <div class="field-body">
-      <div class="field">
-        <input class="input" type="text" name="name" , value="{{poi.name}}">
+<section class="section">
+  <div class="box columns">
+    <div class=" column is-half">
+      <h1 class="title">{{poi.name}}</h1>
+      <h2 class="title is-5">Summary: {{poi.summary}}</h2>
+      
+      <div class="buttons">
+        <a href="/dashboard" class="button is-link">Back to Dashboard</a>
       </div>
-      <div class="field">
-        <input class="input" type="text" name="description" value="{{poi.description}}">
+    </div>
+    <div class=" column is-half">
+      <div id="map" style="height:300px"></div>
+       <p>Latitude: {{poi.latitude}}</p>
+      <p>Longitude: {{poi.longitude}}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="box content">
+    <label class="title is-5">Description:</label>
+        <p class="title is-5"> {{poi.description}}</p>
       </div>
-      <div class="field">
-        <input class="input" type="float" name="latitude" value="{{poi.latitude}}" min="-90" max="90" step="any">
-      </div>
+</section>
 
-      <div class="field">
-        <input class="input" type="float" name="longitude" value="{{poi.longitude}}" min="-180" max="180" step="any">
-      </div>
-      <div class="field">
-  <div class="control">
-    <div class="select">
-        <select name="category" required>
-        <option value="" disabled selected>Select a category</option>
-        <option value="Restaurant">Restaurant</option>
-        <option value="Cafe">Cafe</option>
-        <option value="Bar">Bar</option>
-        <option value="Park">Park</option>
-        <option value="Museum">Museum</option>
-        <option value="Hotel">Hotel</option>
-        <option value="Shop">Shop</option>
-        <option value="Theatre">Theatre</option>
-        <option value="Landmark">Landmark</option>
-        <option value="Educational">Educational</option>
-        <option value="Company">Company</option>
-        <option value="Farm">Farm</option>
-        <option value="Road">Road</option>
-        <option value="Garden">Garden</option>
-        <option value="Bridge">Bridge</option>
-        <option value="Hike">Hike</option>
-        <option value="Shopping Centre">Shopping Centre</option>
-        <option value="Airport">Airport</option>
-        <option value="Bus">Bus</option>
-        <option value="Train">Train</option>
-        <option value="Bank">Bank</option>
-        <option value="Police">Police</option>
-        <option value="Pharmacy">Pharmacy</option>
-        <option value="Hospital">Hospital</option>
-        <option value="Clinic">Clinic</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-  </div>
-</div>
-    </div>
-  </div>
-  <button class="button is-primary">Update Poi</button>
-</form>
+{{> edit-poi}}
+
+<script>var map = L.map('map').setView([{{poi.latitude}}, {{poi.longitude}}], 10);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+var marker = L.marker([{{poi.latitude}}, {{poi.longitude}}])
+  .addTo(map)
+  .bindPopup("\
+  <p>{{poi.category}}</p>\
+  <p>{{poi.name}}</p>\
+  <p>{{poi.summary}}</p>")
+  .openPopup()
+</script>

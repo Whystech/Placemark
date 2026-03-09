@@ -1,5 +1,6 @@
 import { PoiSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import { ESLint } from "eslint";
 
 export const poiController = {
   index: {
@@ -28,10 +29,11 @@ export const poiController = {
         description: request.payload.description,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
+        summary: request.payload.summary,
         category: request.payload.category,
       };
       await db.poiStore.updatePoi(poi, newPoi);
-      return h.redirect(`/${request.params.id}`);
+      return h.redirect("/poi/edit/" + poi._id);
     },
   },
 
@@ -51,6 +53,7 @@ export const poiController = {
         description: request.payload.description,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
+        summary: request.payload.summary,
         category: request.payload.category,
       };
       await db.poiStore.addPoi(loggedInUser._id, newPoi);

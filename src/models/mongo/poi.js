@@ -6,6 +6,7 @@ const poiSchema = new Schema({
   name: String,
   category: String,
   description: String,
+  summary: String,
   latitude: Number,
   longitude: Number,
   userid: {

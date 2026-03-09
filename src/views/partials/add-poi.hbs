@@ -1,54 +1,65 @@
 <form class="box" action="/dashboard/addPoi" method="POST">
-  <label>Enter POI Details:</label>
-  <div class="field is-horizontal">
-    <div class="field-body">
-      <div class="field">
-        <input class="input" type="text" placeholder="Enter Name" name="name">
+  <div class="field">
+      <label class="label">Enter POI Details:</label>
+    <div class="is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <label class="label">Name</label>
+          <input class="input" type="text" placeholder="Enter Name" name="name">
+        </div>
+        <div class="field">
+          <label class="label">Summary</label>
+          <input class="input" type="text" placeholder="Enter Summary" name="summary">
+        </div>
+        <div class="field">
+          <label class="label">Latitude</label>
+          <input class="input" type="number" placeholder="Enter Latitude" name="latitude" step="any">
+        </div>
+        <div class="field">
+          <label class="label">Longitude</label>
+          <input class="input" type="number" placeholder="Enter Longitude" name="longitude" step="any">
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Category</label>
+            <div class="select">
+              <select name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Restaurant">Restaurant</option>
+                <option value="Cafe">Cafe</option>
+                <option value="Bar">Bar</option>
+                <option value="Park">Park</option>
+                <option value="Museum">Museum</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Shop">Shop</option>
+                <option value="Theatre">Theatre</option>
+                <option value="Landmark">Landmark</option>
+                <option value="Educational">Educational</option>
+                <option value="Company">Company</option>
+                <option value="Farm">Farm</option>
+                <option value="Road">Road</option>
+                <option value="Garden">Garden</option>
+                <option value="Bridge">Bridge</option>
+                <option value="Hike">Hike</option>
+                <option value="Shopping Centre">Shopping Centre</option>
+                <option value="Airport">Airport</option>
+                <option value="Bus">Bus</option>
+                <option value="Train">Train</option>
+                <option value="Bank">Bank</option>
+                <option value="Police">Police</option>
+                <option value="Pharmacy">Pharmacy</option>
+                <option value="Hospital">Hospital</option>
+                <option value="Clinic">Clinic</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="field">
-        <input class="input" type="text" placeholder="Enter Description" name="description">
-      </div>
-      <div class="field">
-        <input class="input" type="number" placeholder="Enter Latitude" name="latitude">
-      </div>
-      <div class="field">
-        <input class="input" type="number" placeholder="Enter Longitude" name="longitude">
-      </div>
-       <div class="field">
-  <div class="control">
-    <div class="select">
-        <select name="category" required>
-        <option value="" disabled selected>Select a category</option>
-        <option value="Restaurant">Restaurant</option>
-        <option value="Cafe">Cafe</option>
-        <option value="Bar">Bar</option>
-        <option value="Park">Park</option>
-        <option value="Museum">Museum</option>
-        <option value="Hotel">Hotel</option>
-        <option value="Shop">Shop</option>
-        <option value="Theatre">Theatre</option>
-        <option value="Landmark">Landmark</option>
-        <option value="Educational">Educational</option>
-        <option value="Company">Company</option>
-        <option value="Farm">Farm</option>
-        <option value="Road">Road</option>
-        <option value="Garden">Garden</option>
-        <option value="Bridge">Bridge</option>
-        <option value="Hike">Hike</option>
-        <option value="Shopping Centre">Shopping Centre</option>
-        <option value="Airport">Airport</option>
-        <option value="Bus">Bus</option>
-        <option value="Train">Train</option>
-        <option value="Bank">Bank</option>
-        <option value="Police">Police</option>
-        <option value="Pharmacy">Pharmacy</option>
-        <option value="Hospital">Hospital</option>
-        <option value="Clinic">Clinic</option>
-        <option value="Other">Other</option>
-      </select>
     </div>
-  </div>
-</div>
+    <div class="field">
+      <label class="label">Description</label>
+        <textarea class="textarea" name="description" rows="4">{{poi.description}}</textarea>
     </div>
   </div>
   <button class="button is-primary">Add Poi</button>

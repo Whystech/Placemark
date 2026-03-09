@@ -24,9 +24,10 @@ export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 export const PoiSpec = Joi.object()
   .keys({
     name: Joi.string().required().example("Central Park"),
-    description: Joi.string().allow("").optional().example("Large public park in New York"),
+    description: Joi.string().allow("").optional().example("Very large park in New York, it is a representative part of the city, visited by many."),
     /// Limit min/max for the latitude/longitude
     latitude: Joi.number().min(-90).max(90).required().example(40.785091),
+    summary: Joi.string().max(255).allow("").required().example("Large public park in New York."),
     longitude: Joi.number().min(-180).max(180).required().example(-73.968285),
     category: Joi.string().valid(
     "Restaurant",
