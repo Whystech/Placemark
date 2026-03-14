@@ -25,5 +25,8 @@ export const dashboardController = {
       };
       return h.view("dashboard-view", viewData);
     },
+
   },
 };
+
+

@@ -36,5 +36,30 @@ export const userMongoStore = {
 
   async deleteAll() {
     await User.deleteMany({});
-  }
+  },
+
+  // played a bit with the $set funcitonality
+  async updateDetails(id, updatedUser) {
+    await User.updateOne(
+      { _id: id },
+      {
+        $set: {
+          firstName: updatedUser.firstName,
+          lastName: updatedUser.lastName,
+          email: updatedUser.email,
+        },
+      }
+    );
+  },
+
+  async updatePassword(id, newPassword) {
+    await User.updateOne(
+      { _id: id },
+      {
+        $set: {
+          password: newPassword,
+        },
+      }
+    );
+  },
 };

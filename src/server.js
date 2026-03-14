@@ -86,16 +86,34 @@ async function init() {
   });
   server.auth.default("session");
 
-  db.init("mongo");
+  await db.init("mongo");
+
+  const adminEmail = process.env.adminuser;
+  const adminPassword = process.env.adminpassword;
+
+  let admin = await db.userStore.getUserByEmail(adminEmail);
+
+  if (!admin) {
+    admin = await db.userStore.addUser({
+      firstName: "Admin",
+      lastName: "User",
+      email: adminEmail,
+      password: adminPassword,
+      role: "admin",
+    });
+    console.log("Admin user created")
+  } else {
+    console.log("Admin user already exists.");
+  }
+
+
   server.route(webRoutes);
   server.route(apiRoutes);
   await server.start();
   console.log("Server running on %s", server.info.uri);
 }
-
-process.on("unhandledRejection", (err) => {
-  console.log(err);
-  process.exit(1);
-});
+dotenv.config();
 
 init();
+
+

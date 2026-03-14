@@ -3,6 +3,8 @@ import { assertSubset } from "../test-utils.js";
 import { poiService } from "./poi-service.js";
 import { maggie, maggieCredentials, testPois } from "../fixtures.js";
 
+
+/// API TESTS DELETE ALL USERS INCLUDING THE ADMIN USER
 suite("POI API tests", () => {
   let user = null;
 

@@ -63,4 +63,16 @@ suite("POI Model tests", () => {
     pois = await db.poiStore.getAllPois();
     assert.equal(pois.length, 0);
   });
+
+  test("get poi category", async () => {
+    for (let i = 0; i < testPois.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await db.poiStore.addPoi(testPois[i]);
+    }
+    const category = "Park"
+    const categPoi = await db.poiStore.getPoisByCategory(category)
+    categPoi.forEach(poi => {
+       assert.equal(poi.category, category);
+    });
+  });
 });

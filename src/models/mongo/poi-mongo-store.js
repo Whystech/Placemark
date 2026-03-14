@@ -47,6 +47,7 @@ export const poiMongoStore = {
     poiDoc.name = updatedPoi.name;
     poiDoc.description = updatedPoi.description;
     poiDoc.latitude = updatedPoi.latitude;
+    poiDoc.summary = updatedPoi.summary;
     poiDoc.longitude = updatedPoi.longitude;
     poiDoc.category = updatedPoi.category;
     await poiDoc.save();
