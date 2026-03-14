@@ -28,12 +28,12 @@ export const poiService = {
   },
 
   async createPoi(poi) {
-    const res = await axios.post(`${this.poiUrl}/api/pois`, poi);
+    const res = await axios.post(`${this.poiUrl}/api/poi`, poi);
     return res.data;
   },
 
   async getPoi(id) {
-    const res = await axios.get(`${this.poiUrl}/api/pois/${id}`);
+    const res = await axios.get(`${this.poiUrl}/api/poi/${id}`);
     return res.data;
   },
 
@@ -48,7 +48,7 @@ export const poiService = {
   },
 
   async deletePoi(id) {
-    const res = await axios.delete(`${this.poiUrl}/api/pois/${id}`);
+    const res = await axios.delete(`${this.poiUrl}/api/poi/${id}`);
     return res.data;
   },
 

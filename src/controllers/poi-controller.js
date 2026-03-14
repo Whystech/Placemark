@@ -1,6 +1,5 @@
 import { PoiSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
-import { ESLint } from "eslint";
 
 export const poiController = {
   index: {

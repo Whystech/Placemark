@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
-import { poiService } from "./poi-service.js"
+import { poiService } from "./poi-service.js";
 import { maggie, maggieCredentials, testPois } from "../fixtures.js";
 
 suite("POI API tests", () => {
@@ -23,8 +23,9 @@ suite("POI API tests", () => {
 
   test("create poi", async () => {
     const returnedPoi = await poiService.createPoi(testPois[0]);
-    assertSubset(testPois[0], returnedPoi);
-    assert.isDefined(returnedPoi._id);
+    // asser subset as the server adds _id and -v
+    assert.containSubset(returnedPoi, testPois[0] ); 
+    // using contianSubset a must have all testPois[0] fields and match - but it can also have others 
   });
 
   test("create multiple pois", async () => {
@@ -32,7 +33,6 @@ suite("POI API tests", () => {
       // eslint-disable-next-line no-await-in-loop
       await poiService.createPoi(testPois[i]);
     }
-
     const returnedPois = await poiService.getAllPois();
     assert.equal(returnedPois.length, testPois.length);
 
@@ -41,6 +41,19 @@ suite("POI API tests", () => {
       const poi = await poiService.getPoi(returnedPois[i]._id);
       assertSubset(poi, returnedPois[i]);
     }
+  });
+
+  /// add all pois then asser equal each poi against category
+  test("get poi category", async () => {
+    for (let i = 0; i < testPois.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      await poiService.createPoi(testPois[i]);
+    }
+    const category = "Park"
+    const categPoi = await poiService.getPoisByCategory(category)
+    categPoi.forEach(poi => {
+       assert.equal(poi.category, category);
+    });
   });
 
   test("delete POIs", async () => {

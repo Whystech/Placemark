@@ -40,7 +40,15 @@ export const testPois = [
     summary: "Very large park in New York, it is a representative part of the city, visited by many.",
     latitude: 40.785091,
     longitude: -73.968285,
-    category: "park",
+    category: "Park",
+  },
+  {
+    name: "Secondary Park Test",
+    description: "Not so large public park in Rome",
+    summary: "The park widely known as secondary, legendary tests take place here.",
+    latitude: 40.785091,
+    longitude: -73.968285,
+    category: "Park",
   },
   {
     name: "Empire State Building",
@@ -48,7 +56,7 @@ export const testPois = [
     summary: "The Empire State Building is a 102-story Art Deco skyscraper located in Midtown Manhattan in New York City.",
     latitude: 40.748817,
     longitude: -73.985428,
-    category: "landmark",
+    category: "Landmark",
   },
   {
     name: "Times Square",
@@ -56,7 +64,7 @@ export const testPois = [
     summary: "Busy commercial intersection and entertainment hub in the heart of Manhattan.",
     latitude: 40.758896,
     longitude: -73.985130,
-    category: "tourism",
+    category: "Shopping Centre",
   },
 ];
 
@@ -66,5 +74,5 @@ export const statueOfLiberty = {
   description: "The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in New York Harbor. Gifted by France to the United States in 1886, it represents liberty and democracy and is one of the most recognizable landmarks in the world.",
   latitude: 40.689247,
   longitude: -74.044502,
-  category: "monument",
+  category: "Landmark",
 };

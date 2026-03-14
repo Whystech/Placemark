@@ -10,9 +10,9 @@ export const apiRoutes = [
   { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
 
   { method: "GET", path: "/api/pois", config: poiApi.find },
-  { method: "GET", path: "/api/pois/{id}", config: poiApi.findOne },
-  { method: "POST", path: "/api/pois", config: poiApi.create },
+  { method: "GET", path: "/api/poi/{id}", config: poiApi.findOne },
+  { method: "POST", path: "/api/poi", config: poiApi.create },
   { method: "DELETE", path: "/api/pois", config: poiApi.deleteAll },
-  { method: "DELETE", path: "/api/pois/{id}", config: poiApi.deleteOne },
+  { method: "DELETE", path: "/api/poi/{id}", config: poiApi.deleteOne },
   { method: "GET", path: "/api/pois/category/{category}", config: poiApi.findByCategory },
 ];
