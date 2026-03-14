@@ -63,6 +63,7 @@ export const PoiSpec = Joi.object()
   .example("Park"),
     userid: IdSpec,
   })
+  .options({ convert: true })// for lat-long conversions from string to numbers 
   .label("Poi");
 
 export const PoiSpecPlus = PoiSpec.keys({

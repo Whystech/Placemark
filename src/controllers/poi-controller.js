@@ -55,7 +55,7 @@ export const poiController = {
         summary: request.payload.summary,
         category: request.payload.category,
       };
-      await db.poiStore.addPoi(loggedInUser._id, newPoi);
+      await db.poiStore.addPoi(newPoi);
       return h.redirect("/dashboard");
     },
   },
