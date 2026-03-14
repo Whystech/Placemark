@@ -1,0 +1,32 @@
+{{> menu active="details"}}  
+
+<div class="content box columns">   
+    <div class="column is-half">
+    <label class="label">User details</label>
+    <form class="form  " action="/userdetails/detailsupdate" method="POST">
+    <p>First Name:</p>
+    <input class="input" name="firstName" value ={{firstName}}>
+    <div class="mb-5"></div>
+    <p>Last Name: </p>
+    <input class="input" name="lastName" value={{lastName}}>
+    <p>Email:</p>
+    <input class="input" name="email" value ={{userEmail}}>
+    <div class="mb-5"></div>
+    <button class="button is-warning">Update Details</button>
+</form>
+</div>
+<div class="column is-half">
+<form class="form  " action="/userdetails/passwordupdate" method="POST">
+<label class="label">Update Password</label>
+    <p>Enter your password:</p>
+    <input class="input" type="password" name="oldPasswordCheck">
+    <div class="mb-5"></div>
+    <p>New password: </p>
+    <input class="input" name="newPassword" type="password" minlength="8" required>
+    <p>Confirm password:</p>
+    <input class="input" name="newPasswordCheck" type="password" minlength="8" required>
+    <div class="mb-5"></div>
+    <button class="button is-warning">Update Password</button>
+</form>
+</div>
+</div>

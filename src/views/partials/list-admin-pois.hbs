@@ -1,0 +1,43 @@
+<div class="is-columns box">
+  <h1 class="title  has-text-centered">My Points of Interest<h1>
+      <div class="table-container">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Summary</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
+              <th>Category</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each pois}}
+            <tr>
+              <td>
+                {{name}}
+              </td>
+              <td>
+                {{summary}}
+              </td>
+              <td>
+                {{latitude}}
+              </td>
+              <td>
+                {{longitude}}
+              </td>
+              <td>
+                {{category}}
+              </td>
+              <td>
+                <a href="/dashboard/deletePoi/{{_id}}" class="ui icon button">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+</div>
