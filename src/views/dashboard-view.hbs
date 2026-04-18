@@ -5,7 +5,25 @@
   <div id="map" class="box" style="height: 400px;"></div>
   {{> filter-pois}}
   {{> list-pois}}
+  {{> list-public-pois }}
 </section>
+
+ <script>
+  const cursor = new L.icon({
+    iconUrl : "images/cursor.png",
+    iconSize: [20, 20],
+  });
+
+  const redMarker = new L.Icon({
+    iconUrl: "images/red-marker.png",
+    iconSize: [30, 30],
+  });
+
+  const blackMarker = new L.Icon({
+    iconUrl: "images/black-marker.png",
+    iconSize: [35, 35],
+  });
+</script>
 
 <script>
   var map = L.map('map').setView([0, 0], 2);
@@ -21,16 +39,28 @@
     if (marker) {
       marker.remove();
     }
-    marker = L.marker([lat, lng],).addTo(map); //add new marker
+    marker = L.marker([lat, lng], {icon: cursor }).addTo(map); //add new marker
     // Update form inputs
     document.querySelector('input[name="latitude"]').value = lat;
     document.querySelector('input[name="longitude"]').value = lng;
   });
+  </script>
+
+{{#each publicPois}}
+<script>
+  var marker1 = L.marker([{{ this.latitude }}, {{ this.longitude }}], { icon: redMarker })
+  .addTo(map)
+    .bindPopup("\
+  <p>{{this.category}}</p>\
+  <p>{{this.name}}</p>\
+  <p>{{this.summary}}</p>")
+    .openPopup()
 </script>
+{{/each}}
 
 {{#each pois}}
 <script>
-  var marker1 = L.marker([{{ this.latitude }}, {{ this.longitude }}])
+  var marker1 = L.marker([{{ this.latitude }}, {{ this.longitude }}], {icon: blackMarker })
   .addTo(map)
     .bindPopup("\
   <p>{{this.category}}</p>\

@@ -30,40 +30,55 @@ export const PoiSpec = Joi.object()
     /// Limit min/max for the latitude/longitud
     latitude: Joi.number().min(-90).max(90).required().example(40.785091),
     longitude: Joi.number().min(-180).max(180).required().example(-73.968285),
-    category: Joi.string().valid(
-    "Restaurant",
-    "Cafe",
-    "Bar",
-    "Restaurant",
-    "Park",
-    "Museum",
-    "Hotel",
-    "Shop",
-    "Theatre",
-    "Landmark",
-    "Educational",
-    "Company",
-    "Farm",
-    "Road",
-    "Garden",
-    "Bridge",
-    "Hike",
-    "Shopping Centre",
-    "Airport",
-    "Bus",
-    "Train",
-    "Bank",
-    "Police",
-    "Pharmacy",
-    "Hospital",
-    "Clinic",
-    "Other"
-  )
-  .required()
-  .example("Park"),
+    isPrivate: Joi.boolean(),
+    /// Comments
+    comments: Joi.array()
+      .items(
+        Joi.object({
+          title: Joi.string().required(),
+          text: Joi.string().required(),
+          author: Joi.string().required(),
+          date: Joi.date().iso().required(),
+          authorId: IdSpec,
+        })
+      )
+      .optional(),
+    /// Category
+    category: Joi.string()
+      .valid(
+        "Restaurant",
+        "Cafe",
+        "Bar",
+        "Restaurant",
+        "Park",
+        "Museum",
+        "Hotel",
+        "Shop",
+        "Theatre",
+        "Landmark",
+        "Educational",
+        "Company",
+        "Farm",
+        "Road",
+        "Garden",
+        "Bridge",
+        "Hike",
+        "Shopping Centre",
+        "Airport",
+        "Bus",
+        "Train",
+        "Bank",
+        "Police",
+        "Pharmacy",
+        "Hospital",
+        "Clinic",
+        "Other"
+      )
+      .required()
+      .example("Park"),
     userid: IdSpec,
   })
-  .options({ convert: true })// for lat-long conversions from string to numbers 
+  .options({ convert: true }) // for lat-long conversions from string to numbers
   .label("Poi");
 
 export const PoiSpecPlus = PoiSpec.keys({

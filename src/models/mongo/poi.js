@@ -9,6 +9,19 @@ const poiSchema = new Schema({
   summary: String,
   latitude: Number,
   longitude: Number,
+  isPrivate: Boolean,
+  comments: [
+    {
+      title: String,
+      text: String,
+      authorId: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+      author: String,
+      date: { type: Date, default: Date.now }
+    }
+  ],
   userid: {
     type: Schema.Types.ObjectId,
     ref: "User",

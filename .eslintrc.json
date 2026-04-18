@@ -26,6 +26,9 @@
     "no-else-return": "off",
     "prefer-destructuring":"off",
     "eslint-plugin-vue/no-useless-concat": "off",
-    "no-useless-return": "off"
+    "no-useless-return": "off",
+    "prefer-template": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off"
   }
 }

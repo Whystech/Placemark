@@ -23,11 +23,16 @@
       </div>
 </section>
 
-{{#if comments}}
-{{> comment-section}}
-{{/if }}
+{{>add-comment}}
 
-{{> edit-poi}}
+{{#if poi.comments}}
+{{> comment-section}}
+{{/if}}
+
+<section>
+
+</section>
+
 
 <script>var map = L.map('map').setView([{{poi.latitude}}, {{poi.longitude}}], 10);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

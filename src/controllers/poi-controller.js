@@ -13,6 +13,17 @@ export const poiController = {
     },
   },
 
+   publicIndex: {
+    handler: async function (request, h) {
+      const poi = await db.poiStore.getPoiById(request.params.id);
+      const viewData = {
+        title: "View Public Poi",
+        poi: poi,
+      };
+      return h.view("public-poi-view", viewData);
+    },
+  },
+
   update: {
     validate: {
       payload: PoiSpec,
@@ -30,6 +41,7 @@ export const poiController = {
         longitude: Number(request.payload.longitude),
         summary: request.payload.summary,
         category: request.payload.category,
+        isPrivate: request.payload.isPrivate,
       };
       await db.poiStore.updatePoi(poi, newPoi);
       return h.redirect("/poi/edit/" + poi._id);
@@ -54,6 +66,7 @@ export const poiController = {
         longitude: Number(request.payload.longitude),
         summary: request.payload.summary,
         category: request.payload.category,
+        isPrivate: request.payload.isPrivate,
       };
       await db.poiStore.addPoi(newPoi);
       return h.redirect("/dashboard");
@@ -67,4 +80,19 @@ export const poiController = {
       return h.redirect("/dashboard");
     },
   },
+
+  addComment: {
+    handler: async function (request, h) {
+    const poi = await db.poiStore.getPoiById(request.params.id);
+    const author = request.auth.credentials
+    const comment = {
+      title : request.payload.title,
+      text : request.payload.text,
+      authorId: author._id,
+      author: author.firstName,
+    }
+    await db.poiStore.addPoiComment(poi._id, comment)
+    return h.redirect("/public-poi/view/" + poi._id)
+    },
+  }
 };

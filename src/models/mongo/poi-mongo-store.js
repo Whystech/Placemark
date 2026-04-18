@@ -6,6 +6,11 @@ export const poiMongoStore = {
     return pois;
   },
 
+    async getAllPublicPois() {
+    const pois = await Poi.find({ isPrivate: false }).lean();
+    return pois;
+  },
+
   async addPoi(poi) {
     const newPoi = new Poi(poi);
     const poiObj = await newPoi.save();
@@ -50,6 +55,13 @@ export const poiMongoStore = {
     poiDoc.summary = updatedPoi.summary;
     poiDoc.longitude = updatedPoi.longitude;
     poiDoc.category = updatedPoi.category;
+    poiDoc.isPrivate = updatedPoi.isPrivate;
     await poiDoc.save();
   },
+
+  async addPoiComment(id, comment) {
+    const poiDoc = await Poi.findOne({ _id: id })
+    poiDoc.comments.push(comment)
+    await poiDoc.save()
+  }
 };
