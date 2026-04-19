@@ -19,17 +19,21 @@ export const poiController = {
       // Average rating calculation
       let ratingSum = 0;
       let averageRating = 0 
+      let numberOfRatings = 0;
       if (!poi || !poi.ratings || poi.ratings.length === 0){
         averageRating = 0;
+        numberOfRatings = 0;
       }
       for (const rating of poi.ratings) {
         ratingSum += rating.value;
       }
       averageRating = ratingSum / poi.ratings.length
+      numberOfRatings = poi.ratings.length
       const viewData = {
         title: "View Public Poi",
         poi: poi,
-        averageRating: averageRating
+        averageRating: averageRating,
+        numberOfRatings: numberOfRatings
       };
       return h.view("public-poi-view", viewData);
     },
