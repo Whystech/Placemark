@@ -1,0 +1,11 @@
+<form action="/public-poi/view/{{poi._id}}/add-rating" method="POST">
+    <div class="box">
+        <p class="title">Rate me</p>
+        <div class="pb-5">
+        <input type="range" min="0" max="5" value={{ averageRating }} class="slider" name="ratingValue" id="myRange">
+        <p class="subtitle">Average value: {{ averageRating }}</p>
+        </div>
+        <button class="button is-info">Submit Rating</button>
+    </div>
+    
+</form>

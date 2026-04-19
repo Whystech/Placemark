@@ -13,12 +13,23 @@ export const poiController = {
     },
   },
 
-   publicIndex: {
+  publicIndex: {
     handler: async function (request, h) {
       const poi = await db.poiStore.getPoiById(request.params.id);
+      // Average rating calculation
+      let ratingSum = 0;
+      let averageRating = 0 
+      if (!poi || !poi.ratings || poi.ratings.length === 0){
+        averageRating = 0;
+      }
+      for (const rating of poi.ratings) {
+        ratingSum += rating.value;
+      }
+      averageRating = ratingSum / poi.ratings.length
       const viewData = {
         title: "View Public Poi",
         poi: poi,
+        averageRating: averageRating
       };
       return h.view("public-poi-view", viewData);
     },
@@ -83,16 +94,29 @@ export const poiController = {
 
   addComment: {
     handler: async function (request, h) {
-    const poi = await db.poiStore.getPoiById(request.params.id);
-    const author = request.auth.credentials
-    const comment = {
-      title : request.payload.title,
-      text : request.payload.text,
-      authorId: author._id,
-      author: author.firstName,
-    }
-    await db.poiStore.addPoiComment(poi._id, comment)
-    return h.redirect("/public-poi/view/" + poi._id)
+      // Get the POI
+      const poi = await db.poiStore.getPoiById(request.params.id);
+      // Get current user
+      const author = request.auth.credentials;
+      const comment = {
+        title: request.payload.title,
+        text: request.payload.text,
+        authorId: author._id,
+        author: author.firstName,
+      };
+      // Push comment into POI comment array
+      await db.poiStore.addPoiComment(poi._id, comment);
+      return h.redirect("/public-poi/view/" + poi._id);
     },
-  }
+  },
+
+  addRating: {
+    handler: async function (request, h) {
+      const user = request.auth.credentials;
+      const poiId = request.params.id;
+      const ratingValue = Number(request.payload.ratingValue);
+      await db.poiStore.addOrUpdateRating(poiId, user._id, ratingValue);
+      return h.redirect("/public-poi/view/" + poiId);
+    },
+  },
 };

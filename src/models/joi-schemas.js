@@ -76,6 +76,16 @@ export const PoiSpec = Joi.object()
       )
       .required()
       .example("Park"),
+    /// Ratings
+    ratings: Joi.array()
+      .items(
+        Joi.object({
+          userId: IdSpec.required(),
+          value: Joi.number().min(1).max(5).required(),
+          date: Joi.date().iso().required(),
+        })
+      )
+      .optional(),
     userid: IdSpec,
   })
   .options({ convert: true }) // for lat-long conversions from string to numbers

@@ -1,46 +1,45 @@
 <div class="is-columns box">
   <h1 class="title  has-text-centered">Public Points of Interest</h1>
-      <div class="table-container">
-        <table class="table is-fullwidth">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Summary</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
-              <th>Category</th>
-              <th>User Name</th>
-              <th></th>
-              <th>View PPOI</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each publicPois}}
-            <tr>
-              <td>
-                {{name}}
-              </td>
-              <td>
-                {{summary}}
-              </td>
-              <td>
-                {{latitude}}
-              </td>
-              <td>
-                {{longitude}}
-              </td>
-              <td>
-                {{category}}
-              </td>
-              <td>{{user.firstName}}</td>
-              <td>  <td>
-                <a href="/public-poi/view/{{_id}}" class="ui icon button">
-                  <i class="fas fa-edit"></i>
-                </a>
-              </td></td>
-            </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
+  <div class="table-container">
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Summary</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Category</th>
+          <th>User Name</th>
+          <th>Rating</th>
+          <th>View PPOI</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each publicPois}}
+        <tr>
+          <td>
+            {{name}}
+          </td>
+          <td>
+            {{summary}}
+          </td>
+          <td>
+            {{latitude}}
+          </td>
+          <td>
+            {{longitude}}
+          </td>
+          <td>
+            {{category}}
+          </td>
+          <td>{{user.firstName}}</td>
+          <td>{{ averageRating }}<td>
+            <a href="/public-poi/view/{{_id}}" class="ui icon button">
+              <i class="fas fa-edit"></i>
+            </a>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -63,5 +63,25 @@ export const poiMongoStore = {
     const poiDoc = await Poi.findOne({ _id: id })
     poiDoc.comments.push(comment)
     await poiDoc.save()
+  },
+
+  async addOrUpdateRating(poiId, userId, ratingValue) {
+  const poiDoc = await Poi.findOne({ _id: poiId });  
+  // Check for Existing ratings amde by a user
+  const existing = poiDoc.ratings.find(
+    (r) => r.userId.toString() === userId.toString()
+  );
+  if (existing) {
+    existing.value = ratingValue;
+    existing.date = new Date();
+  } else {
+    poiDoc.ratings.push({
+      userId: userId,
+      value: ratingValue,
+      date: new Date(),
+    });
   }
+  await poiDoc.save();
+  return poiDoc;
+}
 };

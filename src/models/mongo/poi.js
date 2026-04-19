@@ -26,6 +26,16 @@ const poiSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  ratings: [
+    {
+      userId: {
+        type: Schema.Types.ObjectId,
+        ref:"User"
+      },
+      value: Number,
+      date: { type: Date, default: Date.now }
+    }
+  ]
 });
 
 export const Poi = Mongoose.model("Poi", poiSchema);

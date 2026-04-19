@@ -33,6 +33,7 @@ export const webRoutes = [
   { method: "POST", path: "/poi/update/{id}", config: poiController.update },
   { method: "GET", path: "/public-poi/view/{id}", config: poiController.publicIndex },
   {method: "POST", path: "/public-poi/view/{id}/add-comment", config: poiController.addComment },
+   {method: "POST", path: "/public-poi/view/{id}/add-rating", config: poiController.addRating },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 ];

@@ -7,9 +7,18 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
 
       let pois = await db.poiStore.getPoisByUserId(loggedInUser._id);
-      pois.forEach(poi => {
-        poi.latitude = poi.latitude.toFixed(2)
-        poi.longitude = poi.longitude.toFixed(2)
+      pois.forEach((poi) => {
+        poi.latitude = poi.latitude.toFixed(2);
+        poi.longitude = poi.longitude.toFixed(2);
+        if (!poi.ratings || poi.ratings.length === 0) {
+          poi.averageRating = 0;
+        } else {
+          let sum = 0;
+          for (const rating of poi.ratings) {
+            sum += rating.value;
+          }
+          poi.averageRating = sum / poi.ratings.length;
+        }
       });
 
       if (category) {
@@ -24,12 +33,21 @@ export const dashboardController = {
 
       let publicPois = await db.poiStore.getAllPublicPois();
 
-     for (const publicPoi of publicPois) {
-        publicPoi.latitude = publicPoi.latitude.toFixed(2)
-        publicPoi.longitude = publicPoi.longitude.toFixed(2)
-        publicPoi.user = await db.userStore.getUserById(publicPoi.userid) // get some details about the user - even though an error shows up an this might not be the best way, it works.
-      };
-      
+      for (const publicPoi of publicPois) {
+        publicPoi.latitude = publicPoi.latitude.toFixed(2);
+        publicPoi.longitude = publicPoi.longitude.toFixed(2);
+        publicPoi.user = await db.userStore.getUserById(publicPoi.userid); // get some details about the user - even though an error shows up an this might not be the best way, it works.
+        if (!publicPoi.ratings || publicPoi.ratings.length === 0) {
+        publicPoi.averageRating = 0;
+        } else {
+          let sum = 0;
+          for (const rating of publicPoi.ratings) {
+            sum += rating.value;
+          }
+          publicPoi.averageRating = sum / publicPoi.ratings.length;
+        }
+      }
+
       if (category) {
         const publicCategoryPois = [];
         publicPois.forEach((poi) => {
