@@ -1,0 +1,17 @@
+<section class="section box">
+    <h1 class="title">Gallery</h1>
+    <div class="columns">
+        <div class="column fixed-grid has-3-cols is-full">
+            <div class="grid">
+                {{#each poi.images}}
+                <div class="cell" style="display:flex; flex-direction:column;">
+                    <a href="{{this.imageUrl}}" target="blank">
+                        <img src="{{this.imageUrl}}" style="min-height:300px; max-height:150px; object-fit: cover">
+                    </a>
+                </div>
+
+                {{/each}}
+                
+            </div>
+        </div>
+</section>

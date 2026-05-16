@@ -1,0 +1,31 @@
+
+<form action="/poi/uploadImage/{{poi._id}}" method="POST" enctype="multipart/form-data">
+  <h1 class="title is-5">Add an image</h1>
+  <div id="upload-box" class="file has-name is-boxed">
+    <label class="file-label">
+      <input id="image-input" class="file-input" type="file" name="imageFileName" accept="image/png, image/jpeg"/>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label"> Choose a file… </span>
+      </span>
+      <span class="file-name"></span>
+    </label>
+  </div>
+    <button id="uploadButton" class="button is-link mt-3" type="submit" disabled>Upload</button>
+</form>
+
+<script>
+  const fileInput = document.querySelector("#image-input");
+  const uploadBox = document.querySelector("#upload-box");
+  const uploadButton = document.querySelector("#uploadButton")
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector(".file-name");
+      fileName.textContent = fileInput.files[0].name;
+      uploadBox.classList.add("is-success")
+      uploadButton.disabled = false;
+    } 
+  };
+</script>

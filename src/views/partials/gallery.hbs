@@ -1,0 +1,23 @@
+<section class="section box">
+    <h1 class="title">Gallery</h1>
+    <div class="columns">
+        <div class="column fixed-grid has-3-cols is-full">
+            <div class="grid">
+                {{#each poi.images}}
+                <div class="cell" style="display:flex; flex-direction:column;">
+                    <a href="{{this.imageUrl}}" target="blank">
+                        <img src="{{this.imageUrl}}" style="min-height:300px; max-height:150px; object-fit: cover">
+                    </a>
+
+                    <a class="button is-danger is-light mt-2"
+                        href="/poi/{{../poi._id}}/delete-image?url={{this.imageUrl}}" style="margin-top:auto;">
+                        Remove
+                    </a>
+                </div>
+
+                {{/each}}
+                
+            </div>
+            {{> add-image}}
+        </div>
+</section>

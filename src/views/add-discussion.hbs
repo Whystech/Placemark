@@ -1,0 +1,48 @@
+{{> menu active="discussion" }}
+
+<section class="section">
+    <section class="section">
+  <div class="container">
+    <h1 class="title">Add a New Discussion</h1>
+    <form action="/discussion/addDiscussion" method="POST">
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input class="input" type="text" name="title" placeholder="Enter discussion title" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control">
+          <textarea class="textarea" name="description" placeholder="Enter description"></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Type</label>
+        <div class="control">
+          <div class="select">
+            <select name="type" required>
+              <option value="">Select a type</option>
+              <option value="General">General</option>
+              <option value="Food">Food</option>
+              <option value="Travel">Travel</option>
+              <option value="Tech">Tech</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" type="submit">Create Discussion</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+</section>

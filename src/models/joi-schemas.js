@@ -112,3 +112,22 @@ export const JwtAuth = Joi.object()
     token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
   })
   .label("JwtAuth");
+
+  export const DiscussionCommentSpec = Joi.object({
+  commentbody: Joi.string().required().example("A comment about wher to fish"),
+  author: Joi.string().required().example("Herr Angler"),
+  authorId: IdSpec.required(),
+}).label("DiscussionComment");
+
+  export const DiscussionSpec = Joi.object({
+  title: Joi.string().required().example("Best places to fish"),
+  description: Joi.string().allow("").optional().example("Not a lot of fish where I live."),
+  type: Joi.string().required().example("Sports"),
+  author: Joi.string().required().example("Sam Fisher"),
+  userId: IdSpec.required(),
+  isEdited: Joi.boolean().default(false),
+  comments: Joi.array().items(DiscussionCommentSpec).default([]),
+}).label("Discussion");
+
+
+

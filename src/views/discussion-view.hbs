@@ -1,0 +1,21 @@
+{{> menu active="discussion"}}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Discussions</h1>
+
+    {{#each discussions}}
+    <div class=box>
+    <a>{{title}}</a>
+    {{description}}
+    {{author}}
+    {{comments}}
+    {{isEdited}}
+    </div>
+
+    {{/each}}
+    <div class="content">
+      <a class="button" href="/discussion/addDiscussionView">+ Discussion</a>
+    </div>
+  </div>
+</section>
