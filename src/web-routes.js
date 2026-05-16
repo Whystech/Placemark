@@ -21,6 +21,7 @@ export const webRoutes = [
   { method: "GET", path: "/userdetails", config: userController.index },
   { method: "POST", path: "/userdetails/detailsupdate", config: userController.updateDetails },
   { method: "POST", path: "/userdetails/passwordupdate", config: userController.updatePassword },
+ 
 
 // Admin routes
   { method: "GET", path: "/admin-view", config: adminController.adminIndex },
@@ -30,10 +31,13 @@ export const webRoutes = [
   { method: "POST", path: "/dashboard/addPoi", config: poiController.addPoi },
   { method: "GET", path: "/dashboard/deletePoi/{id}", config: poiController.deletePoi },
   { method: "GET", path: "/poi/edit/{id}", config: poiController.index },
+  { method: "POST", path: "/poi/uploadImage/{id}", config: poiController.uploadImage},
+  { method: "GET", path: "/poi/{id}/delete-image", config: poiController.deleteImage },
   { method: "POST", path: "/poi/update/{id}", config: poiController.update },
   { method: "GET", path: "/public-poi/view/{id}", config: poiController.publicIndex },
   {method: "POST", path: "/public-poi/view/{id}/add-comment", config: poiController.addComment },
-   {method: "POST", path: "/public-poi/view/{id}/add-rating", config: poiController.addRating },
+  {method: "POST", path: "/public-poi/view/{id}/add-rating", config: poiController.addRating },
+
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 ];

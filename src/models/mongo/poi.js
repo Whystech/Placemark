@@ -10,6 +10,7 @@ const poiSchema = new Schema({
   latitude: Number,
   longitude: Number,
   isPrivate: Boolean,
+  images: [{ imageUrl: String }],
   comments: [
     {
       title: String,
@@ -19,8 +20,8 @@ const poiSchema = new Schema({
         ref: "User",
       },
       author: String,
-      date: { type: Date, default: Date.now }
-    }
+      date: { type: Date, default: Date.now },
+    },
   ],
   userid: {
     type: Schema.Types.ObjectId,
@@ -30,12 +31,12 @@ const poiSchema = new Schema({
     {
       userId: {
         type: Schema.Types.ObjectId,
-        ref:"User"
+        ref: "User",
       },
       value: Number,
-      date: { type: Date, default: Date.now }
-    }
-  ]
+      date: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 export const Poi = Mongoose.model("Poi", poiSchema);

@@ -31,6 +31,14 @@ export const PoiSpec = Joi.object()
     latitude: Joi.number().min(-90).max(90).required().example(40.785091),
     longitude: Joi.number().min(-180).max(180).required().example(-73.968285),
     isPrivate: Joi.boolean(),
+    images: Joi.array()
+      .items(
+        Joi.object({
+          imageUrl: Joi.string().uri().required(),
+        })
+      )
+      .default([]),
+
     /// Comments
     comments: Joi.array()
       .items(

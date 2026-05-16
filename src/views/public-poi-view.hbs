@@ -17,17 +17,23 @@
       <p>Longitude: {{poi.longitude}}</p>
       
   </div>
-  
 </section>
 
+{{#if poi.description}}
 <section class="section">
   <div class="box content">
     <label class="title is-5">Description:</label>
-        <p class="title is-5"> {{poi.description}}</p>
-        
+    <p></p>
+        <p class="title is-6"> {{poi.description}}</p>
       </div>
-      {{> add-rating}}
 </section>
+{{/if}}
+
+{{#if poi.images}}
+{{> gallery-public}}
+{{/if}}
+
+ {{> add-rating}}
 
 {{> add-comment}}
 

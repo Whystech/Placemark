@@ -65,6 +65,20 @@ export const poiMongoStore = {
     await poiDoc.save()
   },
 
+  async addPoiImage(id, imageUrl) {
+  const poiDoc = await Poi.findOne({ _id: id });
+  poiDoc.images.push({ imageUrl });
+  await poiDoc.save();
+  return poiDoc;
+},
+
+async removePoiImage(id, url) {
+  await Poi.updateOne(
+    { _id: id },
+    { $pull: { images: { imageUrl: url } } }
+  );
+},
+
   async addOrUpdateRating(poiId, userId, ratingValue) {
   const poiDoc = await Poi.findOne({ _id: poiId });  
   // Check for Existing ratings amde by a user
