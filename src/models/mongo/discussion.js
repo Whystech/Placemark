@@ -8,6 +8,7 @@ const discussionSchema = new Schema({
   description: String,
   type: String,
   author: String,
+  date: String,
   userid:  {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -15,9 +16,10 @@ const discussionSchema = new Schema({
   isEdited: Boolean,
   comments: [
     {
-      commentbody:String,
+      commentBody:String,
       author: String,
-      authorId: String
+      authorId: String,
+      date: String
     }
   ]
 });

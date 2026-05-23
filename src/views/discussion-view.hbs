@@ -1,21 +1,24 @@
-{{> menu active="discussion"}}
+{{> menu active="discussions"}}
 
 <section class="section">
   <div class="container">
     <h1 class="title">Discussions</h1>
 
-    {{#each discussions}}
-    <div class=box>
-    <a>{{title}}</a>
-    {{description}}
-    {{author}}
-    {{comments}}
-    {{isEdited}}
-    </div>
-
-    {{/each}}
     <div class="content">
       <a class="button" href="/discussion/addDiscussionView">+ Discussion</a>
     </div>
+
+   <div class="" style="max-height: 1000px; overflow-y: auto;">
+  {{#each discussions}}
+    <div class="box">
+      <a class="is-size-3" href="/discussion/{{_id}}">{{title}}</a>
+      <p class="is-size-4">{{description}}</p>
+      <hr>
+      <p class="text-is-grey is-size-7">by {{author}} on {{date}}</p>
+    </div>
+  {{/each}}
+</div>
+
+
   </div>
 </section>

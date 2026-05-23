@@ -42,6 +42,8 @@ export const webRoutes = [
   { method: "GET", path: "/discussion", config: discussionController.index },
   { method: "GET", path: "/discussion/addDiscussionView", config: discussionController.addDiscussionView },
   { method: "POST", path: "/discussion/addDiscussion", config: discussionController.addDiscussion },
+  { method: "GET", path: "/discussion/{id}", config: discussionController.discussionView },
+  { method: "POST", path: "/discussion/{id}/addComment", config: discussionController.addComment},
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 ];

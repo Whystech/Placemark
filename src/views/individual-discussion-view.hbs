@@ -1,0 +1,52 @@
+{{> menu active="discussions"}}
+
+<section class="section">
+  <div class="container">
+
+    <div class="box">
+      <h1 class="title">{{title}}</h1>
+      <p class="text-align-right">{{type}}</p>
+      <p></p>
+    
+        <div class="content">
+          <p></p>
+        <p class="subtitle">{{description}}</p>
+      </div>
+
+     <hr>
+      by <strong>{{author}}</strong> on  <p class="is-size-7 has-text-grey">{{date}}</p>
+      
+      {{#if isedited}}
+      <span class="tag is-warning">Edited</span>
+      {{/if}}
+
+    </div>
+
+    <div class=" box scontent">
+      <h1 class="subtitle">Add Comment</h1>
+      <form action="/discussion/{{_id}}/addComment" method="POST">
+        <input class="textarea" type="text" name="body">
+        <hr>
+        <button class="button is-primary" type="submit">+ Comment</a>
+      </form>
+    </div>
+
+    <hr>
+
+    <h2 class="title is-4">Comments</h2>
+    
+    {{#if comments}}
+    {{#each comments}}
+    <div class="box">
+      <p class="subtitle">{{author}}</p>
+      <p>{{commentBody}}</p>
+      <hr>
+      <p class="is-size-7 has-text-grey">Posted on {{date}}</p>
+    </div>
+    {{/each}}
+    {{else}}
+    <p class="has-text-grey">No comments yet.</p>
+    {{/if}}
+
+  </div>
+</section>
