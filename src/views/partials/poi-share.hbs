@@ -3,9 +3,9 @@
 <script>
   console.log("navigator.share:", navigator.share);
  const shareData = {
-  title: "MDN",
-  text: "Learn web development on MDN!",
-  url: "https://developer.mozilla.org",
+  title: "Look what place I found!",
+  text: "You might enjoy {{poi.name}}",
+  url: window.location.href,
 };
 
 const btn = document.querySelector("button");
