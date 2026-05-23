@@ -1,5 +1,5 @@
-import { db } from "../models/db.js";
 import dotenv from "dotenv";
+import { db } from "../models/db.js";
 
 export const adminController = {
   adminIndex: {

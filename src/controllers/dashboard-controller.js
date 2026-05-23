@@ -1,4 +1,5 @@
 import { db } from "../models/db.js";
+import { clean } from "../utils/sanitize.js";
 
 export const dashboardController = {
   index: {
@@ -6,10 +7,18 @@ export const dashboardController = {
       const category = request.query.category;
       const loggedInUser = request.auth.credentials;
 
+      /// User POIS
       let pois = await db.poiStore.getPoisByUserId(loggedInUser._id);
       pois.forEach((poi) => {
+      /// Sanitize 
+        poi.name = clean(poi.name);
+        poi.summary = clean(poi.summary);
+        poi.category = clean(poi.category);
+      /// Cut lat lon
         poi.latitude = poi.latitude.toFixed(2);
         poi.longitude = poi.longitude.toFixed(2);
+
+        /// Calculate ratings
         if (!poi.ratings || poi.ratings.length === 0) {
           poi.averageRating = 0;
         } else {
@@ -21,6 +30,7 @@ export const dashboardController = {
         }
       });
 
+      /// Get pois by category
       if (category) {
         const categoryPois = [];
         pois.forEach((poi) => {
@@ -31,14 +41,21 @@ export const dashboardController = {
         pois = categoryPois;
       }
 
+      /// Public pois
       let publicPois = await db.poiStore.getAllPublicPois();
-
       for (const publicPoi of publicPois) {
+      /// Sanitize output
+        publicPoi.name = clean(publicPoi.name);
+        publicPoi.summary = clean(publicPoi.summary);
+        publicPoi.category = clean(publicPoi.category);
+
         publicPoi.latitude = publicPoi.latitude.toFixed(2);
         publicPoi.longitude = publicPoi.longitude.toFixed(2);
         publicPoi.user = await db.userStore.getUserById(publicPoi.userid); // get some details about the user - even though an error shows up an this might not be the best way, it works.
+
+        /// Calculate rating for public pois
         if (!publicPoi.ratings || publicPoi.ratings.length === 0) {
-        publicPoi.averageRating = 0;
+          publicPoi.averageRating = 0;
         } else {
           let sum = 0;
           for (const rating of publicPoi.ratings) {
@@ -48,6 +65,7 @@ export const dashboardController = {
         }
       }
 
+      /// Also get public pois by category
       if (category) {
         const publicCategoryPois = [];
         publicPois.forEach((poi) => {
