@@ -1,0 +1,98 @@
+{{> menu active="favoritepois" }}
+  
+  <div class="is-columns box">
+  <h1 class="title  has-text-centered">Favorites</h1>
+  <div class="table-container"  style="max-height:300px; overflow-y:auto">
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Summary</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Category</th>
+     
+          <th>Rating</th>
+          <th>View POI</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each favorites}}
+        <tr>
+          <td>
+            {{name}}
+          </td>
+          <td>
+            {{summary}}
+          </td>
+          <td>
+            {{latitude}}
+          </td>
+          <td>
+            {{longitude}}
+          </td>
+          <td>
+            {{category}}
+          </td>
+          <td>{{averageRating}}<td>
+            <a href="/public-poi/view/{{_id}}" class="ui icon button">
+              <i class="fas fa-edit"></i>
+            </a>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+ <script>
+  const cursor = new L.icon({
+    iconUrl : "images/cursor.png",
+    iconSize: [20, 20],
+  });
+
+  const redMarker = new L.Icon({
+    iconUrl: "images/red-marker.png",
+    iconSize: [30, 30],
+  });
+
+  const blackMarker = new L.Icon({
+    iconUrl: "images/black-marker.png",
+    iconSize: [35, 35],
+  });
+</script>
+
+<script>
+  var map = L.map('map').setView([0, 0], 2);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  var marker; /// Declared now so I can remove it later
+  map.on('click', function (e) {
+    var lat = e.latlng.lat; //gets lat long on click
+    var lng = e.latlng.lng;
+    // Remove old marker if available
+    if (marker) {
+      marker.remove();
+    }
+    marker = L.marker([lat, lng], {icon: cursor }).addTo(map); //add new marker
+    // Update form inputs
+    document.querySelector('input[name="latitude"]').value = lat;
+    document.querySelector('input[name="longitude"]').value = lng;
+  });
+  </script>
+
+{{#each favoritePois}}
+<script>
+  L.marker([{{latitude}}, {{longitude}}], { icon: cursor })
+    .addTo(map)
+    .bindPopup(`
+      <p>{{category}}</p>
+      <p>{{name}}</p>
+      <p>{{summary}}</p>
+      <p>Rating: {{averageRating}}</p>
+      <p>Added by: {{user.firstName}}</p>
+    `);
+</script>
+{{/each}}

@@ -1,6 +1,8 @@
 import { PoiSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/mongo/image-mongo-store.js";
+import { userMongoStore } from "../models/mongo/user-mongo-store.js";
+import { poiMongoStore } from "../models/mongo/poi-mongo-store.js";
 
 export const poiController = {
   index: {
@@ -17,10 +19,14 @@ export const poiController = {
   publicIndex: {
     handler: async function (request, h) {
       const poi = await db.poiStore.getPoiById(request.params.id);
+      const user = request.auth.credentials;
       // Average rating calculation
       let ratingSum = 0;
       let averageRating = 0;
       let numberOfRatings = 0;
+      /// Check if the POI is added as favorite
+      const isFavorite = user.favorites.some((fav) => fav.toString() === poi._id.toString());
+
       if (!poi || !poi.ratings || poi.ratings.length === 0) {
         averageRating = 0;
         numberOfRatings = 0;
@@ -35,8 +41,37 @@ export const poiController = {
         poi: poi,
         averageRating: averageRating,
         numberOfRatings: numberOfRatings,
+        isFavorite: isFavorite,
       };
       return h.view("public-poi-view", viewData);
+    },
+  },
+
+  favoritesIndex: {
+    handler: async function (request, h) {
+      const user = request.auth.credentials;
+      const favoritesId = user.favorites;
+      const favorites = [];
+      /// for Each does not work here because of reasons I cannot comprehend
+      for (const favId of favoritesId) {
+        const favPoi = await poiMongoStore.getPoiById(favId);
+        if (!favPoi.ratings || favPoi.ratings.length === 0) {
+          favPoi.averageRating = 0;
+        } else {
+          let sum = 0;
+          for (const rating of favPoi.ratings) {
+            sum += rating.value;
+          }
+          favPoi.averageRating = sum / favPoi.ratings.length;
+        }
+        favorites.push(favPoi);
+      }
+
+      const viewData = {
+        tile: "Favorites",
+        favorites: favorites,
+      };
+      return h.view("favorites-view", viewData);
     },
   },
 
@@ -144,13 +179,12 @@ export const poiController = {
   },
 
   deleteImage: {
-  handler: async function (request, h) {
-    const poi = await db.poiStore.getPoiById(request.params.id);
-    const imageUrl = request.query.url;   
-    await imageStore.deleteImage(imageUrl);
-    await db.poiStore.removePoiImage(poi._id, imageUrl);
-    return h.redirect("/poi/edit/" + poi._id);
-  }
-}
-
+    handler: async function (request, h) {
+      const poi = await db.poiStore.getPoiById(request.params.id);
+      const imageUrl = request.query.url;
+      await imageStore.deleteImage(imageUrl);
+      await db.poiStore.removePoiImage(poi._id, imageUrl);
+      return h.redirect("/poi/edit/" + poi._id);
+    },
+  },
 };

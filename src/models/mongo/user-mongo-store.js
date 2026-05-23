@@ -62,4 +62,16 @@ export const userMongoStore = {
       }
     );
   },
+
+  async addFavorite (id, poiId) {
+    const user = await User.findOne({_id: id})
+    user.favorites.push(poiId)
+    await user.save()
+  },
+
+  async removeFavorite (id, poiId) {
+    await User.updateOne ({_id:id},
+      {$pull : { favorites: poiId }}
+    )
+  }
 };

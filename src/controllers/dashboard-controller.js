@@ -60,7 +60,6 @@ export const dashboardController = {
 
       const viewData = {
         title: "Placemarker Dashboard",
-        user: loggedInUser,
         pois: pois,
         publicPois: publicPois,
       };

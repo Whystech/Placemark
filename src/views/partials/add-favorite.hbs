@@ -1,0 +1,13 @@
+{{#if isFavorite}}
+  <form action="/public-poi/remove-favorite/{{poi._id}}" method="POST">
+    <button class="button is-warning is-light">
+      Remove Favorite
+    </button>
+  </form>
+{{else}}
+  <form action="/public-poi/add-favorite/{{poi._id}}" method="POST">
+    <button class="button is-primary is-light">
+     Add to Favorites
+    </button>
+  </form>
+{{/if}}

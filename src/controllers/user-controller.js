@@ -58,4 +58,22 @@ export const userController = {
       return h.redirect("/userdetails");
     },
   },
+
+  addFavorite: {
+    handler: async function (request, h) {
+      const user = request.auth.credentials;
+      const poiId = request.params.id;
+      await db.userStore.addFavorite(user._id, poiId);
+      return h.redirect("/public-poi/view/" + poiId);
+    },
+  },
+
+  removeFavorite: {
+    handler: async function (request, h) {
+      const user = request.auth.credentials;
+      const poiId = request.params.id;
+      await db.userStore.removeFavorite(user._id, poiId);
+      return h.redirect("/public-poi/view/" + poiId);
+    },
+  },
 };

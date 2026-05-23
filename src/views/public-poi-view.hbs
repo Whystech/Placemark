@@ -1,40 +1,46 @@
 {{> menu}}
 
 <section class="section">
-  <div class="box columns">
+  <div class="box">
+    <div class="columns">
     <div class=" column is-half">
       <h1 class="title">{{poi.name}}</h1>
       <h2 class="title is-5">Summary: {{poi.summary}}</h2>
-      
+
       <div class="buttons">
         <a href="/dashboard" class="button is-link">Back to Dashboard</a>
-        
       </div>
     </div>
+
     <div class=" column is-half">
       <div id="map" style="height:300px"></div>
-       <p>Latitude: {{poi.latitude}}</p>
+      <hr>
+      <p>Latitude: {{poi.latitude}}</p>
       <p>Longitude: {{poi.longitude}}</p>
-      
-  </div>
+      <hr>
+      {{> poi-share}}
+      <div class="mt-3"></div>
+      {{> add-favorite}}
+    </div>
+    </div>
 </section>
-{{> poi-share}}
+
 
 {{#if poi.description}}
 <section class="section">
   <div class="box content">
     <label class="title is-5">Description:</label>
     <p></p>
-        <p class="title is-6"> {{poi.description}}</p>
-      </div>
+    <p class="title is-6"> {{poi.description}}</p>
+  </div>
 </section>
-{{/if}}
 
+{{/if}}
 {{#if poi.images}}
 {{> gallery-public}}
 {{/if}}
 
- {{> add-rating}}
+{{> add-rating}}
 
 {{> add-comment}}
 
@@ -42,21 +48,20 @@
 {{> comment-section}}
 {{/if}}
 
-<section>
+<script>
+  var map = L.map('map').setView([{{poi.latitude}}, {{poi.longitude}}], 10);
 
-</section>
-
-
-<script>var map = L.map('map').setView([{{poi.latitude}}, {{poi.longitude}}], 10);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-var marker = L.marker([{{poi.latitude}}, {{poi.longitude}}])
-  .addTo(map)
-  .bindPopup("\
-  <p>{{poi.category}}</p>\
-  <p>{{poi.name}}</p>\
-  <p>{{poi.summary}}</p>")
-  .openPopup()
+  }).addTo(map);
+
+  var marker = L.marker([{{poi.latitude}}, {{poi.longitude}}])
+    .addTo(map)
+    .bindPopup(`
+      <p>{{poi.category}}</p>
+      <p>{{poi.name}}</p>
+      <p>{{poi.summary}}</p>
+    `)
+    .openPopup();
 </script>

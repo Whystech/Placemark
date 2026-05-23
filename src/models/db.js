@@ -5,6 +5,7 @@ import { connectMongo } from "./mongo/connect.js";
 import { poiJsonStore } from "./json/poi-json-store.js";
 import { poiMongoStore } from "./mongo/poi-mongo-store.js";
 
+
 export const db = {
   userStore: null,
   poiStore: null,
@@ -14,6 +15,7 @@ export const db = {
       case "json" :
         this.userStore = userJsonStore;
         this.poiStore = poiJsonStore;
+      
         break;
       case "mongo" :
         this.userStore = userMongoStore;

@@ -37,6 +37,11 @@ export const webRoutes = [
   { method: "GET", path: "/public-poi/view/{id}", config: poiController.publicIndex },
   { method: "POST", path: "/public-poi/view/{id}/add-comment", config: poiController.addComment },
   { method: "POST", path: "/public-poi/view/{id}/add-rating", config: poiController.addRating },
+  { method: "POST", path: "/public-poi/add-favorite/{id}", config: userController.addFavorite },
+  { method: "POST", path: "/public-poi/remove-favorite/{id}", config: userController.removeFavorite },
+  { method: "GET", path: "/favorites", config: poiController.favoritesIndex },
+
+
 
   // Discussions routes
   { method: "GET", path: "/discussion", config: discussionController.index },

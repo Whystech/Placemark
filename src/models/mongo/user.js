@@ -8,6 +8,11 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
+  favorites: [
+    {
+      type: Schema.Types.ObjectId,
+    },
+  ],
 });
 
 userSchema.statics.findByEmail = function (email) {
