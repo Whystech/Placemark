@@ -1,6 +1,8 @@
 {{> menu active="dashboard"}}
 
 <section class="section">
+  <p class="subtitle">Hello {{user.firstName}} {{user.lastName}}</p>
+  <hr>
   {{> add-poi}}
   <div id="map" class="box" style="height: 400px;"></div>
   {{> filter-pois}}

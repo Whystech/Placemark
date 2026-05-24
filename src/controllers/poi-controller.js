@@ -35,6 +35,9 @@ export const poiController = {
         ratingSum += rating.value;
       }
       averageRating = ratingSum / poi.ratings.length;
+      if (isNaN(averageRating)) {
+        averageRating = 0;
+      }
       numberOfRatings = poi.ratings.length;
       const viewData = {
         title: "View Public Poi",
@@ -163,7 +166,7 @@ export const poiController = {
   uploadImage: {
     handler: async function (request, h) {
       const poi = await db.poiStore.getPoiById(request.params.id);
-      const file = request.payload.imageFileName;
+      const file = request.payload.imagefile;
       const url = await imageStore.uploadImage(file);
       poi.image = url;
       // Associate the url with the poi

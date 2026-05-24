@@ -27,7 +27,7 @@ if (result.error) {
 const swaggerOptions = {
   info: {
     title: "Placemark API",
-    version: "1",
+    version: "0.4.0",
   },
   securityDefinitions: {
     jwt: {

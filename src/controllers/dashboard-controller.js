@@ -80,6 +80,7 @@ export const dashboardController = {
         title: "Placemarker Dashboard",
         pois: pois,
         publicPois: publicPois,
+        user: loggedInUser
       };
 
       return h.view("dashboard-view", viewData);
